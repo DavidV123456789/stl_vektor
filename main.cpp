@@ -45,7 +45,13 @@ int main() {
     */
 
     //vypis prvkov vektora pomocou  algoritmu: //
+    //auto kam=std::ostream_iterator<int>(cout," ");//mozeme nahradit: std::copy(intCisla.begin(),intCisla.end(),kam);//rovnako aj z ostatnymi dvomi
     std::copy(intCisla.begin(),intCisla.end(),std::ostream_iterator<int>(cout," "));
+    cout<<endl;
 
+    //tredenie:
+    std::sort(intCisla.begin(), intCisla.end());//algoritmus na tredenie
+    std::copy(intCisla.begin(),intCisla.end(),std::ostream_iterator<int>(cout," "));
+    cout<<endl;
     return 0;
 }
