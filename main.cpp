@@ -64,8 +64,21 @@ int main() {
     std::copy(intCisla.begin(),intCisla.end(),std::ostream_iterator<int>(cout," "));
     cout<<endl;
 
-    std::sort(intCisla.begin(), intCisla.end(),Tried());
+    std::sort(intCisla.begin(), intCisla.end(),Tried());//tým tried určujeme ako má triediť, (tried) máš v záhlavnom
     std::copy(intCisla.begin(),intCisla.end(),std::ostream_iterator<int>(cout," "));
     cout<<endl;
+
+    //landa funkcia: [](odovzdane parametre)->auto{return prikazy;}
+    // auto nie je povinne tam pisat
+    // return tiez nie ak nepozadujeme navratovu hodnotu
+    // odovzdane prametre mozu byt auto
+    //[] su tu premenne, ktore lambda funkcia z okoliteho bloku
+    //ak su uvedene = preberaju sa hodnotou a nedaju sa v labda zmenit
+    //ak su uvedene & preberaju sa odkazom a su menitele
+    std::sort(intCisla.begin(), intCisla.end(),[](auto i, auto j){return  i<j;});//algoritmus na tredenie
+    std::copy(intCisla.begin(),intCisla.end(),std::ostream_iterator<int>(cout," "));
+    cout<<endl;
+
+
     return 0;
 }
