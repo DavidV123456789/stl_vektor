@@ -2,6 +2,7 @@
 #include <vector>//ak chceme pracovat s vektorom
 #include <iterator>//pre pouzitie iteratorov
 #include <algorithm>//pre pouzitie algoritmov
+#include "stlVector.h"
 
 using std::cout;
 using std::endl;
@@ -51,6 +52,19 @@ int main() {
 
     //tredenie:
     std::sort(intCisla.begin(), intCisla.end());//algoritmus na tredenie
+    std::copy(intCisla.begin(),intCisla.end(),std::ostream_iterator<int>(cout," "));
+    cout<<endl;
+
+    //funkcie, ktoré sú pomalé preto je lepšie sa im vyhýbať:
+    intCisla.erase(intCisla.begin()+2,intCisla.begin()+4);//mazanie
+    std::copy(intCisla.begin(),intCisla.end(),std::ostream_iterator<int>(cout," "));
+    cout<<endl;
+
+    intCisla.insert(intCisla.begin()+1,50);//pridanie prvku
+    std::copy(intCisla.begin(),intCisla.end(),std::ostream_iterator<int>(cout," "));
+    cout<<endl;
+
+    std::sort(intCisla.begin(), intCisla.end(),Tried());
     std::copy(intCisla.begin(),intCisla.end(),std::ostream_iterator<int>(cout," "));
     cout<<endl;
     return 0;
