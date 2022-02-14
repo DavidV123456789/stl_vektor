@@ -10,7 +10,7 @@ using std::vector;
 
 int main() {
     //std::cout << "Hello, World!" << std::endl;
-    std::vector<int> intCisla {10,9,8,7,6,5};//prazdny vektor //{10,9,8,7,6,5} ked pridame toto tak bude iniciolizovany hodnotami
+    std::vector<int> intCisla {10,9,8,7,6,5,0};//prazdny vektor //{10,9,8,7,6,5} ked pridame toto tak bude iniciolizovany hodnotami
     intCisla.push_back(1);//prida novy prvok na koniec
     intCisla.push_back(2);
     intCisla.push_back(3);
@@ -79,6 +79,28 @@ int main() {
     std::copy(intCisla.begin(),intCisla.end(),std::ostream_iterator<int>(cout," "));
     cout<<endl;
 
+    std::sort(intCisla.begin(),intCisla.end(),[](auto i, auto j)->auto {return i>j;});
+    std::copy(intCisla.begin(),intCisla.end(),std::ostream_iterator<int>(cout," "));
+    cout<<endl;
+
+    cout<<std::count(intCisla.begin(),intCisla.end(),5);//kolkokrat sa tam nachadza urcita hodnota
+    cout<<endl;
+    cout<<std::count_if(intCisla.begin(),intCisla.end(),[](auto i){return i>=10;});
+    cout<<endl;
+    cout<<std::count_if(intCisla.begin(),intCisla.end(),[](auto i){return i%2==0 && i!=0;});
+    cout<<endl;
+    int delitel=3;
+    cout<<std::count_if(intCisla.begin(),intCisla.end(),[delitel](auto i){return i%delitel==0 && i!=0;});//premenne musi zachytavat do []
+    cout<<endl;
+
+    auto koniec=std::remove(intCisla.begin(),intCisla.end(),5);//musi sa zmenit koniec ak odstranujem priamo hodnoty
+    std::copy(intCisla.begin(),koniec,std::ostream_iterator<int>(cout," "));
+    cout<<endl;
+
+    koniec=std::remove_if(intCisla.begin(),koniec,[](auto i){return i*i>5;});
+    std::copy(intCisla.begin(),koniec,std::ostream_iterator<int>(cout," "));
+    cout<<endl;
+    intCisla.erase(koniec,intCisla.end());//uplnne vymaze premenne od konca do praveho konca
 
     return 0;
 }
