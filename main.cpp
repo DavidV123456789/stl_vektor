@@ -4,6 +4,7 @@
 #include <algorithm>//pre pouzitie algoritmov
 #include "stlVector.h"
 #include <fstream>
+#include <string.h>
 using std::cout;
 using std::endl;
 using std::vector;
@@ -140,7 +141,33 @@ int main() {
     std::ofstream fout("zapis.txt");
     std::copy_if(intCisla.begin(),intCisla.end(),std::ostream_iterator<int>(fout," "),[](auto i)->bool{return i%2;});
     std::ifstream fin("citaj.txt");
-    std::copy(std::istream_iterator<int>(fin),std::istream_iterator<int>(),std::ostream_iterator<int>(cout,""));
+    std::copy(std::istream_iterator<int>(fin),std::istream_iterator<int>(),std::ostream_iterator<int>(cout," "));//KAM TO POSLAŤ -> RESULT
+
+    cout<<endl;
+    std::string meno="David";
+    std::string priezvisko="Vdoviak";
+    cout<<meno+" "+priezvisko+" - "+meno[0]+priezvisko[0]<<endl;
+    std::vector<std::string>slova;
+    fin.close();
+    fin.open("veta.txt");
+    cout<<endl;
+    std::copy(std::istream_iterator<std::string>(fin),std::istream_iterator<std::string>(),std::ostream_iterator<std::string>(cout,"\n"));
+    cout<<endl;
+
+    fin.close();
+    fin.open("veta.txt");
+    std::copy(std::istream_iterator<std::string>(fin),std::istream_iterator<std::string>(),std::back_inserter(slova));
+    print(slova,"Slova");
+
+    auto cmp=[](auto i, auto j){
+            i[0]=std::tolower(i[0]);
+            j[0]=std::tolower(j[0]);
+            return i<j;
+    };
+    sort(slova.begin(),slova.end(),cmp);
+    print(slova,"Triedenie");
+    sort(slova.begin(),slova.end(),[](auto i, auto j){return i.length()<j.length();});
+    print(slova,"Triedenie");
 
     return 0;
 }
